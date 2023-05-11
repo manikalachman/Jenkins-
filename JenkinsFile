@@ -10,32 +10,63 @@ pipeline{
             steps{
                 echo "fetch the source code from the ${DIRECTORY_PATH}"
                 echo "compile the code and generate any necessary artifacts"
+                echo "This code is created using a built-in automation tool called Maven"
             }
         }
-        stage('Test'){
+        stage('Unit and Integration Test'){
             steps{
                 echo "unit tests"
                 echo "integration tests"
+                echo "The automation tool used for this was Maven"
+            }
+             post {
+            success {
+            mail to: "manikalachman@gmail.com",
+            subject: "Test Status: $(currentBuild.result)",
+            body: "The test stage has completed. Status: $(currentBuild.result)"
+            }
+            failure {
+            mail to: "manikalachman@gmail.com",
+            subject: "Test Status: $(currentBuild.result)",
+            body: "The test stage has completed. Status: $(currentBuild.result)"
             }
         }
-        stage('Code'){
+        stage('Code Analysis'){
             steps{
                 echo "check the quality of the code"
+                echo "The tool used here was SomarQube"
             }
         }
-        stage('Deploy'){
+        stage('Security Scan'){
             steps{
-                echo "deploy the application to a ${TESTING_ENVIRONMENT}"
+                  echo "To can the security on this code Checkmarx is used"
+            }
+            post{
+            success {
+            mail to: "manikalachman@gmail.com",
+            subject: "Security Scan Status: $(currentBuild.result)",
+            body: "The security scan stage has completed. Status: $(currentBuild.result)"
+            }
+            failure {
+            mail to: "manikalachman@gmail.com",
+            subject: "Security Scan Status: $(currentBuild.result)",
+            body: "The security scan stage has completed. Status: $(currentBuild.result)"
             }
         }
-        stage('Approval'){
+        stage('Deploy to staging'){
             steps{
-                sleep time: 10, unit: "SECONDS"
+                echo "deploy the application to a production server (e.g., AWS EC2 instance) in Jenkins"
             }
+        }
+        stage('Integration Tests on Staging'){
+            steps{
+                 echo 'run integration tests on the staging environmentt to ensure the application is running'
+             }
         }
         stage('Deploy to production'){
             steps{
                 echo "deploy the code TO ${PRODUCTION_ENVIRONMENT}"
+                echo "deploy the application to a production server (e.b.,AWS EC2 instance).
             }
         }
     }
