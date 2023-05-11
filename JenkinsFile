@@ -1,0 +1,42 @@
+pipeline{
+    agent any 
+    environment{
+        DIRECTORY_PATH = "C:/Users/Manika/AppData/Local/Jenkins/.jenkins/jobs/Manika"
+        TESTING_ENVIRONMENT = "JENKINS"
+        PRODUCTION_ENVIRONMENT = "Manika"
+    }
+    stages{
+        stage('Build'){
+            steps{
+                echo "fetch the source code from the ${DIRECTORY_PATH}"
+                echo "compile the code and generate any necessary artifacts"
+            }
+        }
+        stage('Test'){
+            steps{
+                echo "unit tests"
+                echo "integration tests"
+            }
+        }
+        stage('Code'){
+            steps{
+                echo "check the quality of the code"
+            }
+        }
+        stage('Deploy'){
+            steps{
+                echo "deploy the application to a ${TESTING_ENVIRONMENT}"
+            }
+        }
+        stage('Approval'){
+            steps{
+                sleep time: 10, unit: "SECONDS"
+            }
+        }
+        stage('Deploy to production'){
+            steps{
+                echo "deploy the code TO ${PRODUCTION_ENVIRONMENT}"
+            }
+        }
+    }
+}
