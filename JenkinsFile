@@ -22,13 +22,13 @@ pipeline{
              post {
                   success {
                       mail to: "manikalachman@gmail.com",
-                      subject: "Test Status: $(currentBuild.result)",
-                      body: "The test stage has completed. Status: $(currentBuild.result)"
+                      subject: "Test Status: ${currentBuild.result}",
+                      body: "The test stage has completed. Status: ${currentBuild.result}"
             }
             failure {
                 mail to: "manikalachman@gmail.com",
-                subject: 'Test Status: $(currentBuild.result)',
-                body: "The test stage has completed. Status: $(currentBuild.result)"
+                subject: 'Test Status: ${currentBuild.result}',
+                body: "The test stage has completed. Status: ${currentBuild.result}"
               }
            }
         }
@@ -45,13 +45,13 @@ pipeline{
             post{
                 success {
                     mail to: "manikalachman@gmail.com",
-                    subject: "Security scan status: $(currentBuild.result)",
-                    body: "The security scan stage has completed. Status: $(currentBuild.result)"
+                    subject: "Security scan status: ${currentBuild.result}",
+                    body: "The security scan stage has completed. Status: ${currentBuild.result}"
             }
             failure {
                 mail to: "manikalachman@gmail.com",
-                subject: "Security Scan Status: $(currentBuild.result)",
-                body: "The security scan stage has completed. Status: $(currentBuild.result)"
+                subject: "Security Scan Status: ${currentBuild.result}",
+                body: "The security scan stage has completed. Status: ${currentBuild.result}"
               }
            }
         }
