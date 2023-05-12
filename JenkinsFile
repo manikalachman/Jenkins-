@@ -24,13 +24,13 @@ pipeline{
                       mail to: "manikalachman@gmail.com",
                       subject: "Test Status: ${currentBuild.result}",
                       body: "The test stage has completed. Status: ${currentBuild.result}"
+                  }
+                  failure {
+                      mail to: "manikalachman@gmail.com",
+                      subject: "Test Status: ${currentBuild.result}",
+                      body: "The test stage has completed. Status: ${currentBuild.result}"
+                  }
             }
-            failure {
-                mail to: "manikalachman@gmail.com",
-                subject: 'Test Status: ${currentBuild.result}',
-                body: "The test stage has completed. Status: ${currentBuild.result}"
-              }
-           }
         }
         stage('Code Analysis'){
             steps{
@@ -62,13 +62,13 @@ pipeline{
         }
         stage('Integration Tests on Staging'){
             steps{
-                 echo 'run integration tests on the staging environmentt to ensure the application functions as expected in a production like environment.'
+                 echo "run integration tests on the staging environmentt to ensure the application functions as expected in a production like environment."
              }
         }
         stage('Deploy to production'){
             steps{
-                echo 'deploy the code TO $PRODUCTION_ENVIRONMENT'
-                echo 'deploy the application to a production server (e.b.,AWS EC2 instance).'
+                echo "deploy the code TO $PRODUCTION_ENVIRONMENT"
+                echo "deploy the application to a production server (e.b.,AWS EC2 instance)."
             }
         }
     }
